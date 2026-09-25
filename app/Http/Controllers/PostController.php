@@ -79,6 +79,13 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+
+        $user= $request()->user();
+
+        if ($posts->user_id !== $user->id) {
+            return response()->json(['message'=>'You are not allowed to delete this post.'], 403)
+        }
+        
             $post->delete();
 
             return response()->json(['message'=> 'post deleted'], 200);
