@@ -10,6 +10,6 @@ class tasks extends Model
         return $this->belongTo(User::class)
     }
     public function project() {
-        return $this->belongTo(Project::class)
+        return $this->belongTo(projects::class)
     }
 }

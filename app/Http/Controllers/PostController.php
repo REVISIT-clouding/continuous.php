@@ -11,7 +11,7 @@ use App\Models\User;
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of Post resource.
      */
     public function index()
     {
@@ -21,6 +21,11 @@ class PostController extends Controller
         return response()->json(['message'=> 'Could not load'], 500);
        }
     }
+
+    /**
+     * Display a listing of Project resource.
+     */
+
 
     /**
      * Store a newly created resource in storage.
@@ -48,18 +53,17 @@ class PostController extends Controller
         ]
         ], 201);
     }
-
+    
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Post $post)
     // apiResource() already generates the CRUD routes,
-// including GET, POST, PUT/PATCH, and DELETE.
-// Adding another apiResource with {id} is unnecessary.
+    // including GET, POST, PUT/PATCH, and DELETE.
+    //  Adding another apiResource with {id} is unnecessary.
     {
-
-//    $post = Post::findOrFail($id);  no need for this anymore.
-   #id came from the url remember still does, just post is in place for post and id
+        // $post = Post::findOrFail($id);  no need for this anymore.
+        // #id came from the url remember still does, just post is in place for post and id
 
         $request->validate([
             'title'=> 'required|max:60|string',
@@ -86,7 +90,7 @@ class PostController extends Controller
         $user= $request()->user();
 
         if ($posts->user_id !== $user->id) {
-            return response()->json(['message'=>'You are not allowed to delete this post.'], 403)
+            return response()->json(['message'=>'You are not allowed to delete this post.'], 403);
         }
         
             $post->delete();
@@ -94,20 +98,7 @@ class PostController extends Controller
             return response()->json(['message'=> 'post deleted'], 200);
     }
 
-    public function getProject(Request $request) {
-         
-    $findProject = Project::find(1)
-
-
-    if (!$findProject) {
-       return response()->json(['message'=>'Could not find the project you are looking for'], 404)
     }
 
-    return response()->json([
-        'name'=> $findProject->name,
-        'description'=> $findProject->description,
-        'task'=> $findProject->tasks
-        ],200)
+   
 
-    }
-}
