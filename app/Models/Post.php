@@ -10,3 +10,7 @@ class Post extends Model
     #[Fillable(['title', 'body'])]
 
 }
+
+public function posts() {
+    return $this->belongsTo(Post::class)
+}

@@ -15,6 +15,8 @@ Route::middleware('auth:sanctum')->get('/me', function (Request $request){
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('posts', PostController::class);
+    Route::apiResource('tasks', PostController::class);
+    Route::apiResource('projects', PostController::class);
 });
 
 Route::post('/register', [AuthController::class, 'register']);

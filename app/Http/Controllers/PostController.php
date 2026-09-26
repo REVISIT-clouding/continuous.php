@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\projects;
+use App\Models\tasks;
+use App\Models\User;
 
 class PostController extends Controller
 {
@@ -89,5 +92,22 @@ class PostController extends Controller
             $post->delete();
 
             return response()->json(['message'=> 'post deleted'], 200);
+    }
+
+    public function getProject(Request $request) {
+         
+    $findProject = Project::find(1)
+
+
+    if (!$findProject) {
+       return response()->json(['message'=>'Could not find the project you are looking for'], 404)
+    }
+
+    return response()->json([
+        'name'=> $findProject->name,
+        'description'=> $findProject->description,
+        'task'=> $findProject->tasks
+        ],200)
+
     }
 }
